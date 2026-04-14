@@ -180,14 +180,14 @@
   }
 
   .product-img-wrap {
-    height: 130px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .product-img {
-    max-height: 120px;
+    max-height: 190px;
     max-width: 100%;
     object-fit: contain;
     transition: transform 0.4s ease;
@@ -312,6 +312,7 @@
 
   /* INJECTION */
   .injection-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .injection-wrap.three { grid-template-columns: 1fr 1fr 1fr; }
 
   .injection-item {
     background: var(--white);
@@ -517,13 +518,156 @@
     .total-cta { text-align: left; }
     footer { flex-direction: column; align-items: flex-start; }
   }
+  /* BLOODWORK */
+  .bloodwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .bloodwork-item {
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-top: 3px solid var(--blue);
+    border-radius: 3px;
+    padding: 24px;
+  }
+
+  .bloodwork-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .bloodwork-title span {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .bloodwork-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bloodwork-list li {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 12px;
+    border-left: 2px solid var(--blue-light);
+  }
+
+  .bloodwork-list li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* FAQ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    padding: 24px;
+  }
+
+  .faq-q {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .faq-a {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  /* EFFETS SECONDAIRES */
+  .se-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .se-item {
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 3px;
+    padding: 20px;
+  }
+
+  .se-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .se-body {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  @media (max-width: 768px) {
+    .bloodwork-grid { grid-template-columns: 1fr; }
+    .se-grid { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+
+  .price-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 80px;
+    gap: 2px;
+  }
+
+  .col-label {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .final-price-wrap {
+    display: flex;
+    gap: 32px;
+    margin: 8px 0 4px;
+    align-items: flex-end;
+  }
+
+  .final-price-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2px;
+  }
+
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo-wrap">
-    <img src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/WHITE-FULL-LOGO-PNG.png" alt="General Pharmaceuticals">
+    <img src="https://i.ibb.co/YFgGvf7X/PNG-logo-HD-1.png" alt="General Pharmaceuticals">
   </div>
   <div class="header-meta">
     <div class="label">Guide produits</div>
@@ -542,7 +686,7 @@
     <div class="product-card">
       <span class="product-tag required">Requis × 2</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-15-100-1.jpg" alt="Testostérone Enanthate">
+        <img class="product-img" src="https://i.ibb.co/ccf16gRS/Artboard-15-100-1-1.jpg" alt="Testostérone Enanthate">
       </div>
       <div class="product-molecule">Testosterone Enanthate</div>
       <div class="product-name">Testostérone<br>Enanthate</div>
@@ -556,7 +700,7 @@
     <div class="product-card">
       <span class="product-tag required">Requis × 2</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-13-100.jpg" alt="Testostérone Cypionate">
+        <img class="product-img" src="https://i.ibb.co/TMZR6v8N/Artboard-13-100.jpg" alt="Testostérone Cypionate">
       </div>
       <div class="product-molecule">Testosterone Cypionate</div>
       <div class="product-name">Testostérone<br>Cypionate</div>
@@ -577,7 +721,7 @@
     <div class="product-card">
       <span class="product-tag">Optionnel × 2</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-26-100.jpg" alt="Turinabol">
+        <img class="product-img" src="https://i.ibb.co/Z6bDHXr2/Artboard-26-100.jpg" alt="Turinabol">
       </div>
       <div class="product-molecule">Chlorodehydromethyltestosterone</div>
       <div class="product-name">Turinabol</div>
@@ -591,7 +735,7 @@
     <div class="product-card">
       <span class="product-tag">Optionnel × 2</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-2-100.jpg" alt="Anavar">
+        <img class="product-img" src="https://i.ibb.co/8L1dppbM/Artboard-2-100.jpg" alt="Anavar">
       </div>
       <div class="product-molecule">Oxandrolone</div>
       <div class="product-name">Anavar</div>
@@ -612,7 +756,7 @@
     <div class="product-card">
       <span class="product-tag required">Requis</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-24-100.jpg" alt="Arimidex">
+        <img class="product-img" src="https://i.ibb.co/PzjSn10s/Artboard-24-100.jpg" alt="Arimidex">
       </div>
       <div class="product-molecule">Anastrozole</div>
       <div class="product-name">Arimidex</div>
@@ -626,7 +770,7 @@
     <div class="product-card">
       <span class="product-tag required">Requis</span>
       <div class="product-img-wrap">
-        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-12-100.jpg" alt="Nolvadex">
+        <img class="product-img" src="https://i.ibb.co/h1Tmbkp4/Artboard-12-100.jpg" alt="Nolvadex">
       </div>
       <div class="product-molecule">Tamoxifène</div>
       <div class="product-name">Nolvadex</div>
@@ -641,7 +785,7 @@
 </section>
 
 <section class="section">
-  <div class="section-label">Planning de dose — Cycle 12 semaines</div>
+  <div class="section-label">Planning de dose — Cycle 10 semaines</div>
   <div class="schedule-wrap">
     <table class="schedule-table">
       <thead>
@@ -666,27 +810,27 @@
           <td class="empty">—</td>
         </tr>
         <tr>
-          <td class="phase">S7 – S12</td>
+          <td class="phase">S7 – S10</td>
           <td><span class="dose-pill">250 mg E3.5D</span></td>
           <td class="empty">—<br><small style="color:var(--muted);font-size:10px;">Oral arrêté</small></td>
           <td><span class="dose-pill ai">0,5 mg E3D</span></td>
           <td class="empty">—</td>
         </tr>
         <tr>
-          <td class="phase">S13 – S14</td>
+          <td class="phase">S11 – S12</td>
           <td class="empty">—<br><small style="color:var(--muted);font-size:10px;">Washout 2 semaines</small></td>
           <td class="empty">—</td>
           <td class="empty">—</td>
           <td class="empty">—</td>
         </tr>
         <tr>
-          <td class="phase">S15 – S19</td>
+          <td class="phase">S13 – S17</td>
           <td class="empty">—</td>
           <td class="empty">—</td>
           <td class="empty">—</td>
           <td>
-            <span class="dose-pill pct">40 mg/j — S15–S16</span><br>
-            <span class="dose-pill pct">20 mg/j — S17–S19</span>
+            <span class="dose-pill pct">40 mg/j — S13–S14</span><br>
+            <span class="dose-pill pct">20 mg/j — S15–S17</span>
           </td>
         </tr>
       </tbody>
@@ -722,6 +866,122 @@
   </div>
 </section>
 
+<section class="section white">
+  <div class="section-label">Analyses de sang</div>
+  <div class="bloodwork-grid">
+
+    <div class="bloodwork-item">
+      <div class="bloodwork-title">Avant le cycle <span>— S0</span></div>
+      <ul class="bloodwork-list">
+        <li><strong>Hormones</strong> : Testo totale, LH, FSH, E2</li>
+        <li><strong>Foie</strong> : ASAT, ALAT, GGT</li>
+        <li><strong>Lipides</strong> : Cholestérol total, LDL, HDL, triglycérides</li>
+        <li><strong>Sang</strong> : NFS complète, hématocrite</li>
+        <li><strong>Rein</strong> : Créatinine, urée</li>
+        <li><strong>Divers</strong> : Glycémie, PSA si +35 ans</li>
+      </ul>
+    </div>
+
+    <div class="bloodwork-item">
+      <div class="bloodwork-title">Pendant le cycle <span>— S4 à S6</span></div>
+      <ul class="bloodwork-list">
+        <li><strong>Hormones</strong> : Testo totale, E2</li>
+        <li><strong>Foie</strong> : ASAT, ALAT, GGT</li>
+        <li><strong>Lipides</strong> : Cholestérol total, LDL, HDL, triglycérides</li>
+        <li><strong>Sang</strong> : NFS complète, hématocrite</li>
+        <li><strong>Rein</strong> : Créatinine, urée</li>
+      </ul>
+    </div>
+
+    <div class="bloodwork-item">
+      <div class="bloodwork-title">Après la PCT <span>— S20+</span></div>
+      <ul class="bloodwork-list">
+        <li><strong>Hormones</strong> : Testo totale, LH, FSH, E2</li>
+        <li><strong>Foie</strong> : ASAT, ALAT, GGT</li>
+        <li><strong>Lipides</strong> : Cholestérol total, LDL, HDL, triglycérides</li>
+        <li><strong>Sang</strong> : NFS complète, hématocrite</li>
+        <li><strong>Rein</strong> : Créatinine, urée</li>
+      </ul>
+    </div>
+
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:16px;">* Prélèvement à jeun. Injecter 2–3 jours avant la prise de sang pour un niveau stable, pas un pic.</p>
+</section>
+
+<section class="section">
+  <div class="section-label">FAQ</div>
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <div class="faq-q">Pourquoi pas un cycle oral seul ?</div>
+      <div class="faq-a">Les oraux suppriment la production naturelle de testostérone. Sans base de testo injectable, tu te retrouves en déficit hormonal en milieu de cycle — fatigue, libido à zéro, perte des gains. La testo injectable remplace ce que ton corps arrête de produire.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Testo E ou Testo C, ça change quoi ?</div>
+      <div class="faq-a">Quasiment rien en pratique. Demi-vie légèrement différente (4,5 j vs 5 j), même fréquence d'injection, même résultat. Le choix se fait souvent sur la disponibilité ou la préférence personnelle. Les deux sont en MCT chez GP.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Quand est-ce qu'on commence à sentir les effets ?</div>
+      <div class="faq-a">Récupération améliorée et légère prise de poids dès S3–S4. Les gains visibles arrivent plutôt S5–S6. Les niveaux sanguins montent vite après la première injection, mais l'accumulation prend quelques semaines.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Pourquoi attendre 2 semaines avant la PCT ?</div>
+      <div class="faq-a">Avec la Testo E ou C, l'ester met environ 2 semaines à se dégrader complètement après la dernière injection. Commencer la PCT trop tôt, c'est se battre contre la testo encore active dans le sang — ça ne sert à rien.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Est-ce que l'AI est obligatoire ?</div>
+      <div class="faq-a">Non, mais il faut l'avoir sous la main. Certains aromatisent peu et n'en auront pas besoin. D'autres en auront besoin dès S2–S3. Sans analyse de sang, impossible de savoir à l'avance — donc on la commande avec le reste et on la prend si les symptômes apparaissent.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Tbol ou Anavar, lequel choisir ?</div>
+      <div class="faq-a">Tbol si tu veux une prise de masse propre avec un peu plus de volume. Anavar si tu privilégies la force et la qualité musculaire avec un minimum de rétention. Les deux sont secs, pas d'aromatisation. Question de profil et d'objectif.</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section white">
+  <div class="section-label">Effets secondaires courants</div>
+  <div class="se-grid">
+
+    <div class="se-item">
+      <div class="se-title">Acné</div>
+      <div class="se-body">Fréquent, surtout dos et épaules. Lié à l'augmentation des androgènes. Hygiène renforcée, savon antibactérien. Disparaît généralement après le cycle.</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-title">Rétention d'eau</div>
+      <div class="se-body">Signe d'un E2 élevé. Si ça gonfle au visage ou aux chevilles, l'AI n'est probablement pas assez dosée. Faire un bilan, ajuster l'Arimidex.</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-title">Sensibilité des tétons</div>
+      <div class="se-body">Premier signe de gyno en développement. Ne pas attendre — augmenter l'AI immédiatement et ajouter du Nolvadex 20 mg/j jusqu'à disparition des symptômes.</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-title">PIP — douleur post-injection</div>
+      <div class="se-body">Normal les premières semaines, surtout si c'est la première fois. Chauffer le flacon avant injection, injecter lentement, bien masser après. Diminue avec l'habitude.</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-title">Perte de cheveux</div>
+      <div class="se-body">Uniquement si prédisposition génétique (père, grand-père). La testo se convertit en DHT qui accélère la chute chez les sujets sensibles. L'Anavar et le Tbol ont un impact DHT limité.</div>
+    </div>
+
+    <div class="se-item">
+      <div class="se-title">Testiculaire — atrophie</div>
+      <div class="se-body">La production endogène s'arrête pendant le cycle, les testicules réduisent de volume. C'est temporaire et réversible avec une PCT correcte. La HCG pendant le cycle peut limiter ça.</div>
+    </div>
+
+  </div>
+</section>
+
 <div class="total-section">
   <div class="section-label">Récapitulatif</div>
   <div class="total-box">
@@ -742,14 +1002,18 @@
         <span class="item">Nolvadex × 1</span>
         <span class="price">22 €</span>
       </div>
+      <div class="total-line">
+        <span class="item">Frais de port</span>
+        <span class="price">20 €</span>
+      </div>
       <div class="total-line sum">
         <span class="item">Total cure complète</span>
-        <span class="price">163 €</span>
+        <span class="price">183 €</span>
       </div>
     </div>
     <div class="total-cta">
       <div class="promo-code">Code première commande : <strong>BIENVENUE10</strong></div>
-      <div class="final-price">146,70 €</div>
+      <div class="final-price">164,70 €</div>
       <div class="after-promo">après réduction de 10%</div>
     </div>
   </div>
@@ -795,7 +1059,7 @@
 </section>
 
 <footer>
-  <img src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/WHITE-FULL-LOGO-PNG.png" alt="GP">
+  <img src="https://i.ibb.co/YFgGvf7X/PNG-logo-HD-1.png" alt="GP">
   <p>
     <a href="https://fr.gporders.com" target="_blank">fr.gporders.com</a>
     &nbsp;·&nbsp;
