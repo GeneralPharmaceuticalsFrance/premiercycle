@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Première Cure — General Pharmaceuticals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a4fba;
+    --blue-dark: #123a8a;
+    --blue-light: #dce6f7;
+    --white: #ffffff;
+    --off-white: #f4f6fb;
+    --border: #c8d3ea;
+    --text: #0e1120;
+    --muted: #4a5270;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off-white);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--blue);
+    padding: 48px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+
+  .logo-wrap img {
+    height: 44px;
+    filter: brightness(0) invert(1);
+  }
+
+  .header-meta { text-align: right; }
+
+  .header-meta .label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+  }
+
+  .header-meta h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .header-meta h1 em { font-style: italic; color: rgba(255,255,255,0.72); }
+
+  /* INTRO */
+  .intro {
+    padding: 32px 60px;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .intro p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+    max-width: 680px;
+  }
+
+  .intro p strong { color: var(--text); font-weight: 500; }
+
+  /* SECTIONS */
+  .section {
+    padding: 48px 60px;
+    border-bottom: 2px solid var(--border);
+    background: var(--off-white);
+  }
+
+  .section.white { background: var(--white); }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 500;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PRODUCT CARDS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    padding: 28px 24px;
+    position: relative;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 4px 24px rgba(26,79,186,0.1);
+    border-color: var(--blue);
+  }
+
+  .product-card:hover .product-img { transform: scale(1.04); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.05s; }
+  .product-card:nth-child(2) { animation-delay: 0.10s; }
+  .product-card:nth-child(3) { animation-delay: 0.15s; }
+  .product-card:nth-child(4) { animation-delay: 0.20s; }
+
+  .product-tag {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .product-tag.required {
+    color: var(--blue);
+    background: var(--blue-light);
+    border-color: rgba(26,79,186,0.3);
+  }
+
+  .product-img-wrap {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img {
+    max-height: 120px;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+  }
+
+  .product-molecule {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2px;
+    font-weight: 400;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .product-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.85;
+    flex: 1;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top: 1.5px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .product-qty { font-size: 10px; color: var(--muted); font-weight: 400; }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+  .product-price span { font-size: 16px; }
+
+  /* SCHEDULE */
+  .schedule-wrap { overflow-x: auto; }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 620px;
+  }
+
+  .schedule-table th {
+    background: var(--blue);
+    color: white;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .schedule-table td {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    vertical-align: top;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .schedule-table tr:nth-child(even) td { background: var(--off-white); }
+
+  .schedule-table td.phase {
+    font-weight: 500;
+    color: var(--blue);
+    white-space: nowrap;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  .schedule-table td.empty { color: var(--muted); font-style: italic; }
+
+  .dose-pill {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue-dark);
+    border: 1px solid rgba(26,79,186,0.25);
+    border-radius: 2px;
+    padding: 3px 8px;
+    font-size: 11px;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .dose-pill.oral {
+    background: #e2f5e2;
+    color: #1f6b1f;
+    border-color: rgba(31,107,31,0.25);
+  }
+
+  .dose-pill.ai {
+    background: #fef4e0;
+    color: #8a6000;
+    border-color: rgba(138,96,0,0.25);
+  }
+
+  .dose-pill.pct {
+    background: #fde8e8;
+    color: #b02020;
+    border-color: rgba(176,32,32,0.25);
+  }
+
+  /* INJECTION */
+  .injection-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .injection-item {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 3px;
+  }
+
+  .injection-item .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .injection-item .spec { font-size: 12px; color: var(--muted); line-height: 2; }
+  .injection-item .spec strong { color: var(--text); font-weight: 500; }
+
+  .injection-item a {
+    font-size: 11px;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: auto;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .injection-item a:hover { opacity: 0.7; }
+
+  /* TOTAL */
+  .total-section {
+    padding: 48px 60px;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .total-box {
+    background: var(--blue);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    border-radius: 3px;
+  }
+
+  .total-breakdown { display: flex; flex-direction: column; gap: 10px; }
+
+  .total-line {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .total-line .item { flex: 1; min-width: 200px; }
+  .total-line .price { color: rgba(255,255,255,0.9); text-align: right; min-width: 50px; font-weight: 500; }
+
+  .total-line.sum {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12px;
+    margin-top: 4px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .total-cta { text-align: right; flex-shrink: 0; }
+
+  .promo-code { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); margin-bottom: 8px; }
+  .promo-code strong { color: white; font-weight: 500; font-size: 14px; letter-spacing: 0.2em; }
+
+  .final-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+  }
+
+  .after-promo { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+  /* ORDER */
+  .order-section {
+    padding: 48px 60px;
+    border-bottom: 2px solid var(--border);
+    background: var(--off-white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .order-cta-wrap h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .order-cta-wrap h2 em { font-style: italic; color: var(--blue); font-weight: 400; }
+
+  .order-cta-wrap p { font-size: 12px; color: var(--muted); margin-bottom: 20px; line-height: 1.9; }
+
+  .btn-order {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 14px 32px;
+    background: var(--blue);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+  }
+
+  .btn-order:hover { background: var(--blue-dark); }
+
+  .order-details { display: flex; flex-direction: column; gap: 18px; }
+
+  .order-detail-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .order-detail-item:last-child { border-bottom: none; }
+
+  .detail-icon {
+    width: 34px; height: 34px;
+    background: var(--blue-light);
+    border: 1.5px solid rgba(26,79,186,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0; color: var(--blue); border-radius: 3px;
+  }
+
+  .detail-text strong { display: block; color: var(--text); font-weight: 500; font-size: 12px; margin-bottom: 3px; }
+  .detail-text p { color: var(--muted); font-size: 11px; line-height: 1.75; }
+
+  /* TOUCHDOWN */
+  .touchdown-section {
+    padding: 48px 60px;
+    border-bottom: 2px solid var(--border);
+    background: var(--white);
+  }
+
+  .touchdown-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .touchdown-text p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 12px;
+    max-width: 640px;
+  }
+
+  .touchdown-text p strong { color: var(--text); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 60px;
+    background: var(--blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  footer img { height: 26px; filter: brightness(0) invert(1); opacity: 0.75; }
+  footer p { font-size: 11px; color: rgba(255,255,255,0.5); }
+  footer a { color: rgba(255,255,255,0.75); text-decoration: none; transition: opacity 0.2s; }
+  footer a:hover { opacity: 0.6; }
+
+  @media (max-width: 768px) {
+    header, .intro, .section, .total-section, .order-section, .touchdown-section, footer {
+      padding-left: 24px; padding-right: 24px;
+    }
+    header { flex-direction: column; align-items: flex-start; }
+    .header-meta { text-align: left; }
+    .header-meta h1 { font-size: 32px; }
+    .injection-wrap { grid-template-columns: 1fr; }
+    .order-section { grid-template-columns: 1fr; gap: 32px; }
+    .total-box { flex-direction: column; align-items: flex-start; }
+    .total-cta { text-align: left; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/WHITE-FULL-LOGO-PNG.png" alt="General Pharmaceuticals">
+  </div>
+  <div class="header-meta">
+    <div class="label">Guide produits</div>
+    <h1>Première <em>cure</em></h1>
+  </div>
+</header>
+
+<div class="intro">
+  <p>Le protocole, <strong>GiantMuscle l'a couvert</strong> mieux qu'on ne le ferait sur MesoRx FR. Ce document, c'est juste la liste de ce que GP propose pour l'équiper — les produits, les prix, le planning de dose, et où commander.</p>
+</div>
+
+<section class="section white">
+  <div class="section-label">Injectables — Base testostérone</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <span class="product-tag required">Requis × 2</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-15-100-1.jpg" alt="Testostérone Enanthate">
+      </div>
+      <div class="product-molecule">Testosterone Enanthate</div>
+      <div class="product-name">Testostérone<br>Enanthate</div>
+      <div class="product-desc">Ester longue durée. Demi-vie ~4,5 jours. Injections E3D ou E3.5D. Formulation MCT, sans éthyl oléate.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 2 flacons pour le cycle</div>
+        <div class="product-price">66<span>€</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-tag required">Requis × 2</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-13-100.jpg" alt="Testostérone Cypionate">
+      </div>
+      <div class="product-molecule">Testosterone Cypionate</div>
+      <div class="product-name">Testostérone<br>Cypionate</div>
+      <div class="product-desc">Demi-vie ~5 jours. Niveaux sanguins légèrement plus stables. Formulation MCT, sans éthyl oléate.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 2 flacons pour le cycle</div>
+        <div class="product-price">66<span>€</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Oraux — Optionnel, choisir l'un ou l'autre</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <span class="product-tag">Optionnel × 2</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-26-100.jpg" alt="Turinabol">
+      </div>
+      <div class="product-molecule">Chlorodehydromethyltestosterone</div>
+      <div class="product-name">Turinabol</div>
+      <div class="product-desc">Oral sec. Pas d'aromatisation, pas de gestion E2 supplémentaire. Gains propres, bon rapport force/masse. Le choix le plus simple pour un premier cycle.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 2 boîtes pour le cycle</div>
+        <div class="product-price">50<span>€</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-tag">Optionnel × 2</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-2-100.jpg" alt="Anavar">
+      </div>
+      <div class="product-molecule">Oxandrolone</div>
+      <div class="product-name">Anavar</div>
+      <div class="product-desc">Oral sec. Gains de force marqués, prise de masse plus modeste. Pas d'aromatisation. Idéal pour éviter la rétention d'eau.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 2 boîtes pour le cycle</div>
+        <div class="product-price">50<span>€</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section white">
+  <div class="section-label">Contrôle E2 & PCT</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <span class="product-tag required">Requis</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-24-100.jpg" alt="Arimidex">
+      </div>
+      <div class="product-molecule">Anastrozole</div>
+      <div class="product-name">Arimidex</div>
+      <div class="product-desc">Inhibiteur d'aromatase. Dose de départ : 0,5 mg E3D. À commencer à partir de la 3e injection. Ajuster selon analyses de sang.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 1 boîte</div>
+        <div class="product-price">25<span>€</span></div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-tag required">Requis</span>
+      <div class="product-img-wrap">
+        <img class="product-img" src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/Artboard-12-100.jpg" alt="Nolvadex">
+      </div>
+      <div class="product-molecule">Tamoxifène</div>
+      <div class="product-name">Nolvadex</div>
+      <div class="product-desc">SERM pour la PCT. Attendre 2 semaines après la dernière injection avant de commencer. Utilisable en cours de cycle contre la gyno.</div>
+      <div class="product-footer">
+        <div class="product-qty">× 1 boîte</div>
+        <div class="product-price">22<span>€</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Planning de dose — Cycle 12 semaines</div>
+  <div class="schedule-wrap">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Semaines</th>
+          <th>Testostérone</th>
+          <th>Oral (optionnel)</th>
+          <th>Arimidex</th>
+          <th>Nolvadex PCT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="phase">S1 – S6</td>
+          <td><span class="dose-pill">250 mg E3.5D</span><br><small style="color:var(--muted);font-size:10px;">ex. Lundi + Jeudi</small></td>
+          <td>
+            <span class="dose-pill oral">Tbol 40–50 mg/j</span><br>
+            <span style="font-size:10px;color:var(--muted);">ou</span><br>
+            <span class="dose-pill oral">Anavar 40 mg/j</span>
+          </td>
+          <td><span class="dose-pill ai">0,5 mg E3D</span><br><small style="color:var(--muted);font-size:10px;">Ajuster selon bilan</small></td>
+          <td class="empty">—</td>
+        </tr>
+        <tr>
+          <td class="phase">S7 – S12</td>
+          <td><span class="dose-pill">250 mg E3.5D</span></td>
+          <td class="empty">—<br><small style="color:var(--muted);font-size:10px;">Oral arrêté</small></td>
+          <td><span class="dose-pill ai">0,5 mg E3D</span></td>
+          <td class="empty">—</td>
+        </tr>
+        <tr>
+          <td class="phase">S13 – S14</td>
+          <td class="empty">—<br><small style="color:var(--muted);font-size:10px;">Washout 2 semaines</small></td>
+          <td class="empty">—</td>
+          <td class="empty">—</td>
+          <td class="empty">—</td>
+        </tr>
+        <tr>
+          <td class="phase">S15 – S19</td>
+          <td class="empty">—</td>
+          <td class="empty">—</td>
+          <td class="empty">—</td>
+          <td>
+            <span class="dose-pill pct">40 mg/j — S15–S16</span><br>
+            <span class="dose-pill pct">20 mg/j — S17–S19</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:14px;">* Dose AI indicative — des analyses de sang sont nécessaires pour ajuster. L'oral est à choisir entre Turinabol ou Anavar, pas les deux.</p>
+</section>
+
+<section class="section white">
+  <div class="section-label">Matériel d'injection — Robé Médical</div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">GP ne vend pas le matériel d'injection. Robé Médical est la référence en France — livraison rapide, disponible sans ordonnance.</p>
+  <div class="injection-wrap">
+    <div class="injection-item">
+      <div class="name">Seringues BD Emerald</div>
+      <div class="spec">
+        <strong>Modèle :</strong> 3 pièces, 10 ml, Luer Lock<br>
+        <strong>Conditionnement :</strong> boîte de 100<br>
+        <strong>Prix :</strong> ~9,43 €<br>
+        <strong>Usage :</strong> aspiration + injection
+      </div>
+      <a href="https://www.robe-materiel-medical.com/materiel-medical-seringues-3-pieces-bd-emerald-boite-de-100-SBPL02.html" target="_blank">→ Commander sur Robé Médical</a>
+    </div>
+    <div class="injection-item">
+      <div class="name">Aiguilles Nipro</div>
+      <div class="spec">
+        <strong>Aspiration :</strong> 21G × 38mm (vertes)<br>
+        <strong>Injection :</strong> 25G × 25mm (oranges) — fessiers<br>
+        <strong>Conditionnement :</strong> boîte de 100<br>
+        <strong>Prix :</strong> ~2,26 € / boîte
+      </div>
+      <a href="https://www.robe-materiel-medical.com/materiel-medical-aiguille-nipro-intramusculaire-sous-cutanee-intraveineuse-boite-de-100-AN1605.html" target="_blank">→ Commander sur Robé Médical</a>
+    </div>
+  </div>
+</section>
+
+<div class="total-section">
+  <div class="section-label">Récapitulatif</div>
+  <div class="total-box">
+    <div class="total-breakdown">
+      <div class="total-line">
+        <span class="item">Testostérone × 2 flacons</span>
+        <span class="price">66 €</span>
+      </div>
+      <div class="total-line">
+        <span class="item">Turinabol ou Anavar × 2 boîtes</span>
+        <span class="price">50 €</span>
+      </div>
+      <div class="total-line">
+        <span class="item">Arimidex × 1</span>
+        <span class="price">25 €</span>
+      </div>
+      <div class="total-line">
+        <span class="item">Nolvadex × 1</span>
+        <span class="price">22 €</span>
+      </div>
+      <div class="total-line sum">
+        <span class="item">Total cure complète</span>
+        <span class="price">163 €</span>
+      </div>
+    </div>
+    <div class="total-cta">
+      <div class="promo-code">Code première commande : <strong>BIENVENUE10</strong></div>
+      <div class="final-price">146,70 €</div>
+      <div class="after-promo">après réduction de 10%</div>
+    </div>
+  </div>
+</div>
+
+<section class="order-section">
+  <div class="order-cta-wrap">
+    <h2>Commander<br>chez <em>GP</em></h2>
+    <p>Paiement crypto (traitement immédiat) ou virement bancaire (délai 48h). Livraison EU, frais fixes. Reship complet garanti si colis perdu ou saisi.</p>
+    <a href="https://fr.gporders.com" class="btn-order" target="_blank">→ fr.gporders.com</a>
+  </div>
+  <div class="order-details">
+    <div class="order-detail-item">
+      <div class="detail-icon">₿</div>
+      <div class="detail-text">
+        <strong>Crypto ou virement</strong>
+        <p>Crypto : traitement immédiat. Virement bancaire : délai de 48h avant traitement de la commande.</p>
+      </div>
+    </div>
+    <div class="order-detail-item">
+      <div class="detail-icon">↺</div>
+      <div class="detail-text">
+        <strong>Reship garanti</strong>
+        <p>Colis perdu ou saisi en douane : on reship en totalité, sans discussion.</p>
+      </div>
+    </div>
+    <div class="order-detail-item">
+      <div class="detail-icon">%</div>
+      <div class="detail-text">
+        <strong>Code BIENVENUE10</strong>
+        <p>-10% sur la première commande. À saisir au moment du paiement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="touchdown-section">
+  <div class="touchdown-text">
+    <h3>Touchdown</h3>
+    <p>J'ai un faible inexplicable pour les photos de colis qui arrivent. Pas de raison valable, c'est juste comme ça — ma grand-mère collectionne les timbres, moi c'est les photos de livraisons.</p>
+    <p>Le deal : tu postes un touchdown avec ta commande GP en photo, tu m'envoies un <strong>MP avec ton numéro de commande suivante</strong>, et j'ajoute un produit dedans. Une vial de testo ou un oral selon dispo. Ton colis posé sur le plan de travail avec les grains de riz qui traînent, ça marche très bien.</p>
+  </div>
+</section>
+
+<footer>
+  <img src="https://general-pharmaceuticals.com/wp-content/uploads/2024/07/WHITE-FULL-LOGO-PNG.png" alt="GP">
+  <p>
+    <a href="https://fr.gporders.com" target="_blank">fr.gporders.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://fr.thinksteroids.com/community/threads/general-pharmaceuticals-le-labo-prefere-de-ton-bodybuilder-prefere.27456/" target="_blank">Thread MesoRx FR</a>
+    &nbsp;·&nbsp;
+    <a href="https://general-pharmaceuticals.com" target="_blank">general-pharmaceuticals.com</a>
+  </p>
+</footer>
+
+</body>
+</html>
